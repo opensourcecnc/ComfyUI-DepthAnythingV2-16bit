@@ -172,7 +172,6 @@ https://depth-anything-v2.github.io
         if depth_out.shape[1] != final_H or depth_out.shape[2] != final_W:
             depth_out = F.interpolate(depth_out.permute(0, 3, 1, 2), size=(final_H, final_W), mode="bilinear").permute(0, 2, 3, 1)
         depth_out = (depth_out - depth_out.min()) / (depth_out.max() - depth_out.min())*65025.0
-        depth_out = depth_out.astype(np.uint16)
         if da_model['is_metric']:
             depth_out = 1 - depth_out
         return (depth_out,)
